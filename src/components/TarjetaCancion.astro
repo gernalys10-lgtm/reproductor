@@ -1,0 +1,25 @@
+---
+const informacionDeLaCancion = Astro.props.informacion
+---
+
+<div id={informacionDeLaCancion._id} class="bg-green-800 text-amber-50 p-4 rounded-lg shadow-md hover:bg-green-600 transition-colors duration-200">
+<div>
+    <img src={informacionDeLaCancion.album.image.url}>
+</div>
+    <!-- Aquí vas a  darle la forma, titulo, album, imagen -->
+     <p>{informacionDeLaCancion.title}</p>
+     <p>{informacionDeLaCancion.album.title}</p>
+
+</div>
+
+<script define:vars={{ informacionDeLaCancion }}>
+    // Aquí va la logica para hacer click en la canción4
+    document.getElementById(informacionDeLaCancion._id)?.addEventListener('click', () => {
+        const event = new CustomEvent('cancionSeleccionada', {
+            detail: {
+                song: informacionDeLaCancion
+            }
+        })
+        document.dispatchEvent(event)
+    })
+</script>
